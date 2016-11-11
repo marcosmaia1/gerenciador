@@ -1,0 +1,13 @@
+	<br>
+	<c:if test="${operadorWeb.operadorLogado}">
+		<footer>
+		<nav class="navigation-bar dark fixed-bottom">
+			<div class="navigation-bar-content container">
+				<span class="element place-center">Unimontes</span>
+				<span class="element place-center">Sistemas de Informação</span>
+			</div>
+		</nav>
+		</footer>
+	</c:if>
+</body>
+</html>

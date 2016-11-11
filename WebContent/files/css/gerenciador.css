@@ -1,0 +1,35 @@
+a{
+	text-decoration: none!important;
+}
+
+#btnCancelar{
+	padding: 11px 19px;
+	font-size: 17.5px;
+}
+
+select:disabled, option:disabled{
+    background-color: #EBEBE4;
+    cursor: no-drop;
+}
+
+input:read-only{
+	background-color: #EBEBE4;
+	cursor: no-drop;
+}
+
+.text-right{
+	text-align: right;
+}
+
+.botoes-centro{
+	text-align: center;
+}
+
+.div-tabela-contato{
+	border:4px #eeeeee solid;
+    padding: 10px 15px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+

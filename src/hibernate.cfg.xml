@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hibernate.connection.username">
+			root
+		</property>
+		<property name="hibernate.connection.password">
+			root
+		</property>
+		<property name="hibernate.connection.url">
+			jdbc:mysql://localhost/comercial
+		</property>
+		<property name="hibernate.connection.driver_class">
+			com.mysql.jdbc.Driver
+		</property>
+		<property name="hibernate.dialect">
+			org.hibernate.dialect.MySQL5InnoDBDialect
+		</property>
+		<property name="hibernate.connection.characterEncoding">UTF-8</property>
+		<property name="hibernate.connection.charSet">UTF-8</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
+		<property name="hibernate.validator.apply_to_ddl">true</property>
+		<property name="show_sql">true</property>
+		<property name="format_sql">true</property>
+
+		<property name="hibernate.connection.provider_class">
+			org.hibernate.connection.C3P0ConnectionProvider
+		</property>
+		<property name="hibernate.c3p0.idle_test_period">100</property>
+		<property name="hibernate.c3p0.preferredTestQuery">select 1;</property>
+		<property name="hibernate.c3p0.acquire_increment">3</property>
+		<property name="hibernate.c3p0.timeout">25200</property>
+		<property name="hibernate.c3p0.min_size">1</property>
+		<property name="hibernate.c3p0.max_size">20</property>
+		<property name="hibernate.c3p0.max_statements">0</property>
+		
+		<mapping class="br.com.gerenciador.modelo.Operador" />
+		<mapping class="br.com.gerenciador.modelo.Contato" />
+		<mapping class="br.com.gerenciador.modelo.Negociacao" />
+		<mapping class="br.com.gerenciador.modelo.Cidade" />
+		<mapping class="br.com.gerenciador.modelo.Regional" />
+		<mapping class="br.com.gerenciador.modelo.Historico" />
+		<!-- <mapping class="br.com.gerenciador.modeloOld.OperadorOld" />
+		<mapping class="br.com.gerenciador.modeloOld.ContatoOld" />
+		<mapping class="br.com.gerenciador.modeloOld.NegociacaoOld" />
+		<mapping class="br.com.gerenciador.modeloOld.HistoricoOld" />-->
+		
+	</session-factory>
+</hibernate-configuration>

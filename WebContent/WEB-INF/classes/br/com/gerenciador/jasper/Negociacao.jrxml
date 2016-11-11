@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Negociacao" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="2236803a-1113-4d38-a2bf-8eb7dd631a6d">
+	<property name="ireport.zoom" value="1.3310000000000004"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="id" class="java.lang.String"/>
+	<field name="dataInicio" class="java.lang.String"/>
+	<field name="contato.nome" class="java.lang.String"/>
+	<field name="status.label" class="java.lang.String"/>
+	<field name="operadorCadastro.nome" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="66" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="34" uuid="ef6a10ee-1898-4b2d-8ddf-6d0ceb55f88f"/>
+				<textElement textAlignment="Center">
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Relatório Negociações]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="65" width="555" height="1" uuid="a6952b49-e978-47d1-ab09-027959c4efe2"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="9" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="24" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="82" height="20" backcolor="#CCCCCC" uuid="bd54e4fa-2df8-4367-8035-58a56075e8a7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial Black" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Negociação"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="0" width="131" height="20" backcolor="#CCCCCC" uuid="4fef65c1-402c-43b5-9d69-978c54353c7f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial Black"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Data de Início"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="223" y="0" width="100" height="20" backcolor="#CCCCCC" uuid="6d7ad732-3e78-43ce-a631-6a33da8f97d9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial Black" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Contato"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="328" y="0" width="100" height="20" backcolor="#CCCCCC" uuid="858c8bd7-6d3e-4379-9fa7-e7be6e90b2d6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial Black" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Status"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="433" y="0" width="100" height="20" backcolor="#CCCCCC" uuid="588360ee-b628-40ac-ad98-8b782abc6bf8"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font fontName="Arial Black" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Responsável"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="19" width="555" height="1" uuid="61e45d88-240f-4b5d-aee5-27ab0ec84bfb"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="82" height="20" uuid="96952329-fbe5-4ed6-8676-eb6ef08dff87"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="0" width="131" height="20" uuid="197243a1-9d9e-4faf-95fd-236444b730d5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{dataInicio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="223" y="0" width="100" height="20" uuid="5ab923d1-cefa-4e32-a38b-b1d5fbb94e0d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{contato.nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="328" y="0" width="100" height="20" uuid="b393b5a9-b1c5-4926-9f48-81f91a3db3c0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{status.label}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="433" y="0" width="100" height="20" uuid="2a2e77da-a73e-43d3-9a62-8e0cc17d3300"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{operadorCadastro.nome}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="13" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="0" width="555" height="1" uuid="2dc25e41-8f33-40c5-bcc2-cf16090c5b84"/>
+			</line>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
