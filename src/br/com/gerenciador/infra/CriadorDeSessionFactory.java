@@ -4,13 +4,12 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
+import org.hibernate.cfg.Configuration;
 
 import br.com.caelum.vraptor.ioc.ApplicationScoped;
 import br.com.caelum.vraptor.ioc.Component;
 import br.com.caelum.vraptor.ioc.ComponentFactory;
 
-@SuppressWarnings("deprecation")
 @Component
 @ApplicationScoped
 public class CriadorDeSessionFactory implements ComponentFactory<SessionFactory>{
@@ -19,7 +18,7 @@ public class CriadorDeSessionFactory implements ComponentFactory<SessionFactory>
 
 	@PostConstruct
 	public void abre(){
-		AnnotationConfiguration annotationConfiguration = new AnnotationConfiguration();
+		Configuration annotationConfiguration = new Configuration();
 		annotationConfiguration.configure("hibernate.cfg.xml");
 		sessionFactory = annotationConfiguration.buildSessionFactory();
 	}

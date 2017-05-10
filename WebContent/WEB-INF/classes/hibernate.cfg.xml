@@ -8,6 +8,7 @@
 			root
 		</property>
 		<property name="hibernate.connection.password">
+			root
 		</property>
 		<property name="hibernate.connection.url">
 			jdbc:mysql://localhost/comercial

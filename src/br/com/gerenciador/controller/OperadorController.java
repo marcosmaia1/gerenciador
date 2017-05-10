@@ -22,12 +22,10 @@ import br.com.gerenciador.enumeration.Entidade;
 import br.com.gerenciador.enumeration.Operacao;
 import br.com.gerenciador.infra.ContatoDao;
 import br.com.gerenciador.infra.OperadorDao;
-import br.com.gerenciador.infra.OperadorOldDao;
 import br.com.gerenciador.modelo.Contato;
 import br.com.gerenciador.modelo.Operador;
 import br.com.gerenciador.modelo.OperadorWeb;
 import br.com.gerenciador.modelo.Restrito;
-import br.com.gerenciador.modeloOld.OperadorOld;
 
 @Resource
 public class OperadorController {
@@ -50,27 +48,7 @@ public class OperadorController {
 		//importaDados();
 		result.include("operadorList", dao.listaTudo()).include("operacao", Operacao.LISTAGEM.getLabel()).include("entidade", Entidade.OPERADOR);
 	}
-	
-	public void importaDados(){
-		List<OperadorOld> operadorOldLista = new OperadorOldDao(dao.getSession()).listaTudo();
-		for(OperadorOld operadorOld : operadorOldLista){
-			if(operadorOld.getIdOperador() != 1L){
-				Operador novo = new Operador();
-				novo.setAdministrador(false);
-				novo.setDataCadastro(new Date());
-				novo.setDesativado(false);
-				novo.setId(new Long(operadorOld.getIdOperador()));
-				novo.setLogin(operadorOld.getNome().toLowerCase().trim());
-				novo.setNome(operadorOld.getNome());
-				novo.setOperadorAlteracao(operadorWeb.getLogado());
-				novo.setOperadorCadastro(operadorWeb.getLogado());
-				novo.setSenha(operadorOld.getSenha());
-				novo.setUltimaAlteracao(new Date());
-				dao.salva(novo);
-			}
-		}
-	}
-	
+
 	private boolean validaFormulario(Operador entity) {
 		boolean resultado = true;
 		

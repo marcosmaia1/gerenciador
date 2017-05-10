@@ -5,8 +5,6 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Transaction;
-
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Put;
@@ -21,9 +19,7 @@ import br.com.gerenciador.enumeration.Operacao;
 import br.com.gerenciador.enumeration.StatusNegociacao;
 import br.com.gerenciador.infra.ContatoDao;
 import br.com.gerenciador.infra.HistoricoDao;
-import br.com.gerenciador.infra.HistoricoOldDao;
 import br.com.gerenciador.infra.NegociacaoDao;
-import br.com.gerenciador.infra.NegociacaoOldDao;
 import br.com.gerenciador.infra.OperadorDao;
 import br.com.gerenciador.infra.RegionalDao;
 import br.com.gerenciador.modelo.Contato;
@@ -33,8 +29,6 @@ import br.com.gerenciador.modelo.Relatorio;
 import br.com.gerenciador.modelo.RelatorioFiltros;
 import br.com.gerenciador.modelo.OperadorWeb;
 import br.com.gerenciador.modelo.Restrito;
-import br.com.gerenciador.modeloOld.HistoricoOld;
-import br.com.gerenciador.modeloOld.NegociacaoOld;
 
 import static br.com.gerenciador.util.FuncoesUtil.iniciaTransacao;
 import static br.com.gerenciador.util.FuncoesUtil.comitaTransacao;
@@ -74,80 +68,6 @@ public class NegociacaoController {
 				.include("entidade", Entidade.NEGOCIACAO);
 	}
 	
-	public void importaHist(){
-		List<HistoricoOld> historicoOldLista = new HistoricoOldDao(dao.getSession()).listaTudo();
-		Transaction transaction = dao.getSession().beginTransaction();
-		for(HistoricoOld old : historicoOldLista){
-			Historico novo = new Historico();
-			novo.setDataCadastro(old.getData());
-			novo.setUltimaAlteracao(old.getData());
-			novo.setOperadorAlteracao(new OperadorDao(dao.getSession()).getOperador(new Long(old.getIdoperador().getIdOperador())));
-			novo.setOperadorCadastro(new OperadorDao(dao.getSession()).getOperador(new Long(old.getIdoperador().getIdOperador())));
-
-			novo.setNegociacao(dao.getNegociacao(new Long(old.getIdNegociacao().getIdNegociacao())));
-			novo.setComentario(old.getComentario());
-			
-			try{
-				new HistoricoDao(dao.getSession()).salva(novo);
-			} catch (Exception e){
-				System.out.println(e);
-				transaction.rollback();
-			}
-		}
-		transaction.commit();
-	}
-	
-	public void importaDados(){
-		List<NegociacaoOld> negociacaoOldLista = new NegociacaoOldDao(dao.getSession()).listaTudo(operadorWeb.getLogado());
-		Transaction transaction = dao.getSession().beginTransaction();
-		for(NegociacaoOld old : negociacaoOldLista){
-			Negociacao novo = new Negociacao();
-			novo.setIdOld(new Long(old.getIdNegociacao()));
-			novo.setDataCadastro(old.getData());
-			novo.setUltimaAlteracao(old.getData());
-			novo.setOperadorAlteracao(new OperadorDao(dao.getSession()).getOperador(new Long(old.getIdoperador().getIdOperador())));
-			novo.setOperadorCadastro(new OperadorDao(dao.getSession()).getOperador(new Long(old.getIdoperador().getIdOperador())));
-			novo.setContato(new ContatoDao(dao.getSession()).getContato(new Long(old.getIdcontato().getIdContato())));
-			novo.setDataInicio(old.getData());
-			novo.setObs(old.getObs());
-			novo.setRegional(new RegionalDao(dao.getSession()).getRegionalByNome(old.getRegional()));
-			
-			String status = old.getStatus();
-			if(status.equals("EA")){
-				novo.setStatus(StatusNegociacao.EM_ANDAMENTO);
-			} else if(status.equals("C")){
-				novo.setStatus(StatusNegociacao.CONCLUIDO);
-			} else if(status.equals("CS")){
-				novo.setStatus(StatusNegociacao.CONCLUIDO_SEM_SUCESSO);
-			} else {
-				novo.setStatus(StatusNegociacao.PROSPECTADO);
-			}
-			
-			String fechamento = old.getFechamento();
-			if(fechamento.equals("10%")){
-				novo.setFechamento(Fechamento.F10);
-			} else if(fechamento.equals("30%")){
-				novo.setFechamento(Fechamento.F30);
-			} else if(fechamento.equals("60%")){
-				novo.setFechamento(Fechamento.F60);
-			} else if(fechamento.equals("90%")){
-				novo.setFechamento(Fechamento.F90);
-			} else if(fechamento.equals("100%")){
-				novo.setFechamento(Fechamento.F100);
-			}
-			
-			novo.setValorFechamento(new BigDecimal(0));
-			
-			try{
-				dao.salva(novo);
-			} catch (Exception e){
-				System.out.println(e);
-				transaction.rollback();
-			}
-		}
-		transaction.commit();
-	}
-
 	private boolean validaFormulario(Negociacao entity) {
 		boolean resultado = true;
 		

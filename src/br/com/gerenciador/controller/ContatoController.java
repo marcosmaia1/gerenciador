@@ -27,15 +27,12 @@ import br.com.gerenciador.enumeration.Entidade;
 import br.com.gerenciador.enumeration.Operacao;
 import br.com.gerenciador.enumeration.TipoPessoa;
 import br.com.gerenciador.enumeration.UF;
-import br.com.gerenciador.infra.CidadeDao;
 import br.com.gerenciador.infra.ContatoDao;
-import br.com.gerenciador.infra.ContatoOldDao;
 import br.com.gerenciador.infra.OperadorDao;
 import br.com.gerenciador.modelo.Contato;
 import br.com.gerenciador.modelo.Operador;
 import br.com.gerenciador.modelo.OperadorWeb;
 import br.com.gerenciador.modelo.Restrito;
-import br.com.gerenciador.modeloOld.ContatoOld;
 
 @Resource
 public class ContatoController {
@@ -73,59 +70,6 @@ public class ContatoController {
 			}catch(Exception e){
 				System.out.println(e);
 				transaction.rollback();
-			}
-		}
-		transaction.commit();
-	}
-	
-	public void importaDados(){
-		List<ContatoOld> contatoOldLista = new ContatoOldDao(dao.getSession()).listaTudo();
-		Transaction transaction = dao.getSession().beginTransaction();
-		for(ContatoOld old : contatoOldLista){
-			Contato novo = dao.getContatoByIdOld(new Long(old.getIdContato()));
-			if(novo == null){
-				try{
-					novo = new Contato();
-					//Operador operador = new OperadorDao(dao.getSession()).getOperador(new Long(old.getIdContato()));
-					novo.setIdOld(new Long(old.getIdContato()));
-					novo.setDataCadastro(new Date());
-					novo.setUltimaAlteracao(new Date());
-					novo.setDesativado(false);
-					//novo.setOperadorAlteracao((operador != null && operador.getId() != null) ? operador : operadorWeb.getLogado());
-					//novo.setOperadorCadastro((operador != null && operador.getId() != null) ? operador : operadorWeb.getLogado());
-					novo.setOperadorAlteracao(operadorWeb.getLogado());
-					novo.setOperadorCadastro(operadorWeb.getLogado());
-					novo.setBairro(old.getBairro());
-					novo.setComplemento(old.getComplemento());
-					novo.setCpfCnpj(retornaSomenteNumeros(old.getCnpj()));
-					novo.setEmail(old.getEmail());
-					novo.setEmail2(old.getEmail2());
-					novo.setEndereco(old.getEndereco());
-					novo.setFantasia(old.getFantasia());
-					novo.setIndicacao(old.getIndicacao());
-					novo.setNome(old.getNome());
-					novo.setNumero(old.getIdoperador().getIdOperador()+"");
-					novo.setRazao(old.getRazao());
-					novo.setSistema(old.getSistema());
-					novo.setTel(retornaSomenteNumeros(old.getTel()));
-					novo.setTel2(retornaSomenteNumeros(old.getTel2()));
-					if(novo.getCpfCnpj().length() == 11){
-						novo.setTipoPessoa(TipoPessoa.F);
-					} else {
-						novo.setTipoPessoa(TipoPessoa.J);
-					}
-					if(dao.getCidadeByContato(old.getCidade(), old.getEstado()) == null){
-						novo.setCidadeNome(old.getCidade());
-						novo.setCidade(new CidadeDao(dao.getSession()).getCidade(2678L));
-					} else {
-						novo.setCidade(dao.getCidadeByContato(old.getCidade(), old.getEstado()));
-					}
-					
-					dao.salva(novo);
-				} catch(Exception e){
-					System.out.println(e);
-					transaction.rollback();
-				}
 			}
 		}
 		transaction.commit();

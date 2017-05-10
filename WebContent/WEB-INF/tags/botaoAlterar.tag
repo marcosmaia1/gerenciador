@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
-<%@ attribute name="controller"     required="true"  type="java.lang.String"%>
-<%@ attribute name="id"     required="true"  type="java.lang.String"%>
+<%@ attribute name="controller" required="true"  type="java.lang.String"%>
+<%@ attribute name="id" required="true"  type="java.lang.String"%>
 
 <button 
 	id="alterar" 

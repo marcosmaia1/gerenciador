@@ -1,1 +1,1 @@
-<%@ include file="negociacao/paginaInicial.jsp" %>
+<%@ include file="../negociacao/paginaInicial.jsp" %>

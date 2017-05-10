@@ -62,7 +62,7 @@
 															data-tr-id="${status.index}"
 															<a title="Selecionar">
 																<i class="icon-checkmark fg-white" id="icone"></i>
-															</a>
+															</a>>
 														</button>
 													    <input type="hidden" id="contato-${status.index}" value="${contato.id}">
 													</div>
@@ -79,7 +79,7 @@
 										class="large warning"
 										type="button"
 										id="btnFecharPrompt"
-										<a title="Fechar prompt">Fechar prompt</a>
+										<a title="Fechar prompt">Fechar prompt</a>>
 									</button>
 								</div>
 								<br>

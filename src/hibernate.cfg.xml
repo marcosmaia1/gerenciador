@@ -11,7 +11,7 @@
 			root
 		</property>
 		<property name="hibernate.connection.url">
-			jdbc:mysql://localhost/comercial
+			jdbc:mysql://localhost/gerenciador
 		</property>
 		<property name="hibernate.connection.driver_class">
 			com.mysql.jdbc.Driver
